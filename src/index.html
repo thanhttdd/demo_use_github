@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue.js</title>
+    <style>
+        .text-red{
+            color: #fc002a;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:class="className">Message = {{ msg }}</p>
+        <p>Phương thức getSite trả về: {{ getSite() }}</p>
+        <p>Phương thức getInfosite trả về: {{getInfoSite()}}</p>
+        <p v-html="slogan"></p>
+        <p v-bind:class="className">Tuổi là số {{age%2==0 ? "chẵn" : "lẻ"}}</p>
+        <p v-if="publish" v-bind:class="className" v-html="slogan"></p>
+        <p><button v-on:click="showAlert">Click</button></p>
+        <form action="#" v-on:submit.prevent="submit">
+            <button type="submit">Gửi</button>
+        </form>
+        <p v-bind:class="className">{{msg | strUpperCase | strReplaceCtoK}}</p>
+        <p>{{convertNameToUpperCase}}</p>
+    </div>
+    <script src="https://unpkg.com/vue@2.4.2" type="text/javascript"></script>
+    <script type="text/javascript">
+        /*
+        VueJs
+        1. Khai báo thuộc tính trong scope data
+        2. Khai báo phương thức trong scope methods
+        3. Vòng đời Instance Lifecycle Hook
+            - beforeCreate  : được gọi khi chúng ta khởi tạo vue.js và trước khi thực hiện tiến trình observe Data và init Events.
+            - created       : được gọi khi tiến trình observe Data và init Events hoàn thành.
+            - beforeMount   : được gọi ngay sau khi tiến trình render function hoàn tất.
+            - mounted       : được gọi khi tiến trình replace el hoàn tất.
+            - beforeUpdate  : được gọi khi data có sự thay đổi, và trước khi visualDOM re-rendered.
+            - updated       : được gọi khi data đã được thay đổi.
+            - beforeDestroy : được gọi ngay khi trước khi vue instance được destroy.
+            - destroyed     : được gọi khi vue instance đã được destroy.
+        4. 
+            - v-html
+            - Attributes: <tag v-bind:attributeName="thuộc tính trong data"></tag>
+            - Using JavaScript Expression: {{}}
+        5. Directives - Chỉ thị
+            - Arguments: v-if, v-on:click
+            - Modifiers(bổ ngữ): v-on:submit.prevent
+        6. Filters: những func filter phải được đặt trong scope filters
+            - {{ name | uppercase }}
+        7. Computed property: những func computed property cần đặt trong scope computed
+        */
+        var app = new Vue({
+            el: '#app',
+            data: {
+                //thuộc tính
+                msg: 'Chào mừng đến với digidinos',
+                slogan: '<span style="font-weight: 600;">Chào mừng bạn đến với website digidinos.com</span>',
+                className: 'text-red',
+                age: 20,
+                publish: true,
+                name: 'digidinos',
+            },
+            methods: {
+                getSite : function () {
+                    return 'digidinos.com'
+                },
+                getInfoSite: function() {
+                    return 'digidinos.com'
+                },
+                showAlert: function () {
+                    alert(this.msg);
+                },
+                submit: function () {
+                    alert("Bạn vừa submit form");
+                }
+            },
+            filters: {
+                strUpperCase: function (data) {
+                    return data.toUpperCase();
+                },
+                strReplaceCtoK: function (data) {
+                    return data.replace("C", "K");
+
+                }
+            },
+            computed: {
+                convertNameToUpperCase: function() {
+                    return this.name.toUpperCase();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
