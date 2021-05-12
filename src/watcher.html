@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue.js</title>
+    <style>
+        .text-red{
+            color: #fc002a;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:class="className">{{ name }}</p>        
+    </div>
+    <script src="https://unpkg.com/vue@2.4.2" type="text/javascript"></script>
+    <script type="text/javascript">
+        /*
+        VueJs
+        1. Watcher
+            - Nguyên tắc:
+            ① tên của watcher phải trùng với tên của data cần theo dõi
+            ② các watcher phải được đặt trong scope watch
+
+        */
+        var app = new Vue({
+            el: '#app',
+            data: {
+                //thuộc tính
+                name: 'digidinos',
+                className: 'text-red'
+            },
+            methods: {
+                
+            },
+            filters: {
+                
+            },
+            computed: {
+                
+            },
+            watch: {
+                name: function () {
+                    return this.name.toUpperCase();
+                }
+            }
+        });
+
+        app.name = "digidinos.com";
+    </script>
+</body>
+</html>
